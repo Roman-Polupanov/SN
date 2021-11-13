@@ -19,23 +19,26 @@ export default function Feed() {
   }
 
   return (
-    <Container component="main" maxWidth="md">
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={1}>
-          {data.ImageFind
-            .filter((item) => item.url)
-            .map((item) => (
-              <Grid item xs>
-                <PhotoCard
-                  nick={item.owner.nick || item.owner.login}
-                  createdAt={item.createAt}
-                  url={item.url}
-                  text={item.text || 'No description'}
-                />
-              </Grid>
-            ))}
-        </Grid>
-      </Box>
-    </Container>
+    <div>
+      <Container component="main" maxWidth="md">
+        <Box sx={{ flexGrow: 1 }}>
+          <Grid container spacing={1}>
+            {data.ImageFind
+              .filter((item) => item.url)
+              .map((item) => (
+                <Grid item xs>
+                  <PhotoCard
+                    nick={item.owner.nick || item.owner.login}
+                    createdAt={item.createAt}
+                    url={item.url}
+                    text={item.text || 'No description'}
+                  />
+                </Grid>
+              ))}
+          </Grid>
+        </Box>
+      </Container>
+
+    </div>
   );
 }

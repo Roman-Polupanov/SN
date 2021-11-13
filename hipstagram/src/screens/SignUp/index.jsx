@@ -4,14 +4,14 @@ import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useMutation } from '@apollo/client';
 import LinearProgress from '@mui/material/LinearProgress';
-import { loginUser } from '../../queries';
+import { loginUser, SIGN_IN_QUERY } from '../../queries';
 
 const Copyright = function (props) {
   return (
@@ -30,13 +30,16 @@ const Copyright = function (props) {
 const theme = createTheme();
 
 export default function SignIn({ onSuccess }) {
+  const [signIn, { loading: signinInProgress }] = useMutation(SIGN_IN_QUERY);
   const [loginInProgress, setLoginInProgress] = React.useState(false);
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const login = data.get('login');
     const password = data.get('password');
+    const variables = { login, password };
 
+    await signIn({ variables });
     setLoginInProgress(true);
     const { data: { login: token } } = await loginUser(login, password);
     setLoginInProgress(false);
@@ -45,11 +48,11 @@ export default function SignIn({ onSuccess }) {
       localStorage.authToken = token;
       onSuccess();
     } else {
-      console.log('failed to signin');
+      console.log('failed to signUp');
     }
   };
 
-  const isLoading = loginInProgress;
+  const isLoading = loginInProgress || signinInProgress;
 
   return (
     <ThemeProvider theme={theme}>
@@ -68,7 +71,7 @@ export default function SignIn({ onSuccess }) {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Log into Hipstagram
+            Create Profile
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
@@ -97,20 +100,8 @@ export default function SignIn({ onSuccess }) {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              Sign Up
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="sign-up" variant="body2">
-                  Don't have an account? Sign Up
-                </Link>
-              </Grid>
-            </Grid>
           </Box>
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
