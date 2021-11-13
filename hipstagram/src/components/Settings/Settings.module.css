@@ -1,0 +1,12 @@
+.content {
+  grid-area: c;
+  background-color: cornsilk;
+}
+
+.content .phonk .avatar img {
+  width: 10%;
+}
+
+.content .phonk img {
+  width: 50%;
+}

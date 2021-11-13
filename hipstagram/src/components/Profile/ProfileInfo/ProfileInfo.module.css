@@ -1,0 +1,14 @@
+
+  
+.phonk .avatar img {
+  position: absolute;
+    width: 10%;
+    padding: 20px;
+  }
+  
+.phonk img {
+  max-height: 500px;
+  width: 100%;
+  
+  }
+  
