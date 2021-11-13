@@ -23,5 +23,7 @@ module.exports = {
     'jsx-a11y/anchor-is-valid': 0,
     'react/no-unescaped-entities': 0,
     'react/prop-types': 0,
+    'import/prefer-default-export': 0,
+    'no-underscore-dangle': 0,
   },
 };

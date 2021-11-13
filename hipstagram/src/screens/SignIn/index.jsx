@@ -12,6 +12,10 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useMutation } from '@apollo/client';
+import LinearProgress from '@mui/material/LinearProgress';
+import { useNavigate } from 'react-router-dom';
+import { loginUser, SIGN_IN_QUERY } from '../../queries';
 
 const Copyright = function (props) {
   return (
@@ -30,18 +34,34 @@ const Copyright = function (props) {
 const theme = createTheme();
 
 export default function SignIn() {
-  const handleSubmit = (event) => {
+  const navigate = useNavigate();
+  const [signIn, { loading: signinInProgress }] = useMutation(SIGN_IN_QUERY);
+  const [loginInProgress, setLoginInProgress] = React.useState(false);
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    const login = data.get('login');
+    const password = data.get('password');
+    const variables = { login, password };
+
+    await signIn({ variables });
+    setLoginInProgress(true);
+    const { data: { login: token } } = await loginUser(login, password);
+    setLoginInProgress(false);
+
+    if (token) {
+      localStorage.authToken = token;
+      navigate('user-profile');
+    } else {
+      console.log('failed to signin');
+    }
   };
+
+  const isLoading = loginInProgress || signinInProgress;
 
   return (
     <ThemeProvider theme={theme}>
+      { isLoading && <LinearProgress /> }
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -63,7 +83,7 @@ export default function SignIn() {
               margin="normal"
               required
               fullWidth
-              id="email"
+              id="login"
               label="Login"
               name="login"
               autoComplete="login"
