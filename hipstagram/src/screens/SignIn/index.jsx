@@ -18,7 +18,7 @@ const Copyright = function (props) {
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        Hipstagram
       </Link>
       {' '}
       {new Date().getFullYear()}
@@ -53,7 +53,7 @@ export default function SignIn({ onSuccess }) {
 
   return (
     <ThemeProvider theme={theme}>
-      { isLoading && <LinearProgress /> }
+      {isLoading && <LinearProgress />}
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box

@@ -22,11 +22,11 @@ export default function Feed() {
     <div>
       <Container component="main" maxWidth="md">
         <Box sx={{ flexGrow: 1 }}>
-          <Grid container spacing={1}>
+          <Grid container spacing={2}>
             {data.ImageFind
               .filter((item) => item.url)
               .map((item) => (
-                <Grid item xs>
+                <Grid item xs="12" md="4" sm="6">
                   <PhotoCard
                     nick={item.owner.nick || item.owner.login}
                     createdAt={item.createAt}

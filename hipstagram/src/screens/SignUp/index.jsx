@@ -18,7 +18,7 @@ const Copyright = function (props) {
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        Hipstagram
       </Link>
       {' '}
       {new Date().getFullYear()}
@@ -48,7 +48,7 @@ export default function SignIn({ onSuccess }) {
       localStorage.authToken = token;
       onSuccess();
     } else {
-      console.log('failed to signUp');
+      alert('failed to signUp');
     }
   };
 

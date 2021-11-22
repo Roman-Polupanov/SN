@@ -12,6 +12,12 @@ export default function Header({ onLogout }) {
   const navigateToSignUp = () => {
     navigate('sign-up');
   };
+  const navigateToProfile = () => {
+    navigate('/profile/login');
+  };
+  const navigateToFeed = () => {
+    navigate('feed');
+  };
 
   return (
     <Container fixed>
@@ -21,6 +27,9 @@ export default function Header({ onLogout }) {
         justifyContent="flex-end"
         alignItems="center"
       >
+        {location.pathname === '/profile/login' && <Button variant="text" onClick={navigateToFeed}>feed</Button>}
+        {location.pathname === '/profile/login' && <Button variant="text" onClick={onLogout}>logout</Button>}
+        {location.pathname === '/feed' && <Button variant="text" onClick={navigateToProfile}>profile</Button>}
         {location.pathname === '/feed' && <Button variant="text" onClick={onLogout}>logout</Button>}
         {location.pathname === '/login' && <Button variant="text" onClick={navigateToSignUp}>Sign Up</Button>}
         {location.pathname === '/sign-up' && <Button variant="text" onClick={navigateToSignIn}>Sign In</Button>}
