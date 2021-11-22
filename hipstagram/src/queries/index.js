@@ -68,25 +68,25 @@ export const FIND_USERS_IMAGES_QUERY = gql`
 export const FIND_USER_PAGE_QUERY = gql`
 query findUserOne($userQuery:String!) {
   UserFind(query: $userQuery) {
-#     _id
-#   createdAt
-#   login
-#   nick
-#   avatar {
-#     _id
-#     url
-#     text
-#   }
-#   likesCount
-#   followers {
-#       _id
-#       login
-#       nick
-#     }
-#   following {
-#       _id
-#       login
-#       nick
-#     }
-#   }
-# }`;
+    _id
+  createdAt
+  login
+  nick
+  avatar {
+    _id
+    url
+    text
+  }
+  likesCount
+  followers {
+      _id
+      login
+      nick
+    }
+  following {
+      _id
+      login
+      nick
+    }
+  }
+}`;
