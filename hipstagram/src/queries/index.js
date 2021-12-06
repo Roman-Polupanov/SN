@@ -217,7 +217,7 @@ export const CREATE_COMMENT = gql`
   }`;
 
 export function loadFile(formData) {
-  return fetch('/upload', {
+  return fetch('http://hipstagram.asmer.fs.a-level.com.ua/upload', {
     method: 'POST',
     headers: localStorage.authToken ? { Authorization: `Bearer ${localStorage.authToken}` } : {},
     body: formData,
