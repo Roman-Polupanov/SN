@@ -20,7 +20,7 @@ import '@fontsource/roboto/700.css';
 // import { AUTH_TOKEN } from './constants';
 
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: 'http://hipstagram.asmer.fs.a-level.com.ua/graphql',
 });
 
 const authLink = setContext((_, { headers }) => {

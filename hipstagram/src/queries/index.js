@@ -16,7 +16,7 @@ export const SIGN_UP = gql`
 //   }`;
 
 export function loginUser(login, password) {
-  return axios.post('/graphql', {
+  return axios.post('http://hipstagram.asmer.fs.a-level.com.ua/graphql', {
     query: `query Login {
       login(login: "${login}", password: "${password}")
     } `,

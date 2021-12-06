@@ -54,16 +54,16 @@ const PostCard = (props) => {
             </Grid>
             <Carousel showThumbs={false} centerMode emulateTouch>
               {
-        props.images.map((image) => (
-          <img
-            key={image._id}
-            src={`/${image.url}`}
-            srcSet={`/${image.url}`}
-            alt={props.text || 'feed-image'}
-            loading="lazy"
-          />
-        ))
-      }
+                props.images.map((image) => (
+                  <img
+                    key={image._id}
+                    src={`http://hipstagram.asmer.fs.a-level.com.ua/${image.url}`}
+                    srcSet={`http://hipstagram.asmer.fs.a-level.com.ua/${image.url}`}
+                    alt={props.text || 'feed-image'}
+                    loading="lazy"
+                  />
+                ))
+              }
             </Carousel>
             <Grid
               container
@@ -106,27 +106,27 @@ const PostCard = (props) => {
             </Grid>
           </Grid>
           {isCommentsShown && (
-          <Grid item xs={12} md={4} padding={2}>
-            <Comments
-              comments={publishedComments}
-              onPublish={(text) => {
-                publishComment({
-                  variables: {
-                    comment: {
-                      post: {
-                        _id: props._id,
+            <Grid item xs={12} md={4} padding={2}>
+              <Comments
+                comments={publishedComments}
+                onPublish={(text) => {
+                  publishComment({
+                    variables: {
+                      comment: {
+                        post: {
+                          _id: props._id,
+                        },
+                        text,
                       },
-                      text,
                     },
-                  },
-                }).then(({ data }) => {
-                  setPublishedComments([...publishedComments, data.CommentUpsert]);
-                }).catch((error) => {
-                  console.log(error);
-                });
-              }}
-            />
-          </Grid>
+                  }).then(({ data }) => {
+                    setPublishedComments([...publishedComments, data.CommentUpsert]);
+                  }).catch((error) => {
+                    console.log(error);
+                  });
+                }}
+              />
+            </Grid>
           )}
         </Grid>
 
